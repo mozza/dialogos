@@ -1,22 +1,23 @@
 from datetime import datetime
 
 from django.db import models
+from django.conf import settings
 
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
 from django.contrib.contenttypes.generic import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 
 
 class Comment(models.Model):
 
-    author = models.ForeignKey(User, null=True, related_name="comments")
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, related_name="comments")
 
     name = models.CharField(max_length=100)
     email = models.CharField(max_length=255, blank=True)
     website = models.CharField(max_length=255, blank=True)
 
     content_type = models.ForeignKey(ContentType)
-    object_id = models.IntegerField()
+    object_id = models.CharField(max_length=200)
     content_object = GenericForeignKey()
 
     comment = models.TextField()

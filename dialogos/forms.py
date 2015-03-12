@@ -12,6 +12,9 @@ class CommentForm(forms.ModelForm):
         fields = [
             "name", "email", "website", "comment"
         ]
+        widgets = {
+            'comment': forms.Textarea(attrs={'rows': 3, 'cols': 80})
+        }
 
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop("request", None)
